@@ -1,13 +1,13 @@
-package com.senai.cit_senai;
+package com.senai.aula08;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CitSenaiApplication {
+public class Aula08Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CitSenaiApplication.class, args);
+		SpringApplication.run(Aula08Application.class, args);
 	}
 
 }

@@ -1,10 +1,11 @@
-package com.senai.cit_senai.controller;
+package com.senai.aula08.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.senai.cit_senai.*;.models.Consultor;
+import com.senai.aula08.models.Consultor;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -80,6 +81,16 @@ public Consultor atualizar(
     @PathVariable Long id, @RequestBody Consultor consultor){
         return  service.atualizar(id, consultor);
     }
+
+
+// ==== 
+// DELETE
+// =====
+
+@DeleteMapping("/{id}")
+public void excluir(@PathVariable Long id){
+    service.excluir(id);
+}
 
 
 

@@ -1,4 +1,4 @@
-package com.senai.cit_senai.models;
+package com.senai.aula08.models;
 
 public enum StatusCliente {
     ATIVO,

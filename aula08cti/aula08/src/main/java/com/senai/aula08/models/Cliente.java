@@ -1,4 +1,4 @@
-package com.senai.cit_senai.models;
+package com.senai.aula08.models;
 
 import java.math.BigDecimal;
 
@@ -138,7 +138,5 @@ public void setStatus(StatusCliente status){
 
 
 
-    
-}
     
 }
