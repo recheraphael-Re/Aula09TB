@@ -1,0 +1,92 @@
+package com.senai.cit_senai.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.senai.cit_senai.*;.models.Consultor;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+// Arquivo controller é responsável por realizar as requisições http da API
+
+@RestController // indica que a classe consultor controller irá receber as requisições http
+@RequestMapping("/consultores") // cria a rota consultores
+public class ConsultorController {
+
+    // Cria a variavel ConsultorService 
+    private final ConsultorService service;
+
+    // Cria o construtor
+    public ConsultorController(
+        ConsultorService service){
+            this.service = service;
+        }
+
+// ======
+//CREATE
+// =======
+
+@PostMapping
+public Consultor criar(
+    @RequestBody Consultor consultor){
+        return service.criar(consultor);
+    }
+
+
+
+// =====
+// LOGIN
+//
+
+@PostMapping("/login")
+public Consultor login(@RequestBody Consultor consultor){
+
+    return service.login(consultor.getEmail(), consultor.getSenha());
+
+}
+
+//====
+// READ
+
+@GetMapping
+public List<Consultor> listar(){
+    return service.listar();
+}
+
+
+// === 
+// READ por id
+// ====
+
+
+@GetMapping("/{id}")
+public Consultor buscar(
+    @PathVariable  Long id){
+        return service.buscarPorId(id);
+    }
+
+
+
+// ==== 
+// UPDATE
+// ====
+
+@PutMapping("/{id}")
+public Consultor atualizar(
+    @PathVariable Long id, @RequestBody Consultor consultor){
+        return  service.atualizar(id, consultor);
+    }
+
+
+
+
+
+
+    
+}
+
+
