@@ -1,5 +1,8 @@
 package com.senai.aula08.service;
 
+import java.util.List;
+import com.senai.aula08.repository.ConsultorRepository;
+
 import javax.management.RuntimeErrorException;
 
 import org.springframework.stereotype.Service; // Biblioteca que permite colocar a anotação service
@@ -30,8 +33,15 @@ public class ConsultorService {
     // CREATE
     // ======
 
-    @Transactional 
-    public Consultor criar(Consultor consultor){
+    private void validarMatricula(String matricula) {
+    if (matricula != null && matricula.length() > 50)
+        throw new org.springframework.web.server.ResponseStatusException(
+            org.springframework.http.HttpStatus.BAD_REQUEST, "Matricula: ate 50 caracteres");
+}
+
+@Transactional
+public Consultor criar(Consultor consultor){
+        validarMatricula(consultor.getMatricula());
         if(consultor.getNome() == null || consultor.getNome().isBlank()){
             throw new RuntimeException(
                 "Nome é obrigatório !"
@@ -106,6 +116,7 @@ public Consultor atualizar(
     Long id, Consultor dados
 ){
 
+    validarMatricula(dados.getMatricula());
     Consultor consultor = buscarPorId(id);
 
 
@@ -116,6 +127,8 @@ public Consultor atualizar(
 
 
     consultor.setSenha(dados.getSenha());
+    consultor.setTelefone(dados.getTelefone());
+    consultor.setMatricula(dados.getMatricula());
 
 
     return  repository.save(consultor);
@@ -129,7 +142,7 @@ public void excluir(Long id){
     Consultor consultor = buscarPorId(id);
 
     repository.deleteById(
-        consultor.getIdLong() );
+        consultor.getIdConsultor() );
 }
     
 }

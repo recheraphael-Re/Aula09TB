@@ -19,6 +19,10 @@ public class Consultor {
 @GeneratedValue (strategy = GenerationType.IDENTITY)
 @Column (name = "id_consultor")
 private Long idConsultor;
+@Column(name = "matricula", length = 50)
+private String matricula;
+public String getMatricula() { return matricula; }
+public void setMatricula(String matricula) { this.matricula = matricula; }
 
 // Cria coluna da tabela consultor
 
@@ -28,13 +32,15 @@ private  String nome;
 @Column (name = "email", nullable = false, unique = true, length = 150)
 private  String email;
 
-@Column (name = "senha", nullable = false, unique = true, length = 150)
+@com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY)
+@Column (name = "senha", nullable = false, length = 150)
 private  String senha;
 
 @Column (name = "telefone", length = 30)
 private  String telefone;
 
 // Relacionamento
+@com.fasterxml.jackson.annotation.JsonIgnore
 @OneToMany (mappedBy = "consultor")
 private List<Cliente> clientes = new ArrayList<>(); // Lista, pois o consultor pode ter varios clientes
 
@@ -53,7 +59,7 @@ public Consultor(String nome, String email, String senha,String telefone){
     this.senha = senha;
 }
 
-public Long getIdLong(){
+public Long getIdConsultor(){
     return idConsultor;
 }
 
@@ -88,7 +94,7 @@ public String getTelefone(){
     return telefone;
 }
 
-public  void setTelefone(){
+public  void setTelefone(String telefone){
     this.telefone = telefone;
 }
 

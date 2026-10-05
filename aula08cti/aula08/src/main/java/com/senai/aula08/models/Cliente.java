@@ -21,7 +21,23 @@ public class Cliente {
     @Id 
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name= "id_cliente")
-    private  Long idCliente; // id do cliente
+    private Long idCliente;
+    @Column(name = "codigo_cti", length = 50)
+    private String codigoCTI;
+    @Column(name = "faixa_faturamento", length = 100)
+    private String faixaFaturamento;
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    @jakarta.persistence.OneToMany(mappedBy = "cliente")
+    private java.util.List<Contrato> contratos = new java.util.ArrayList<>();
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    @jakarta.persistence.OneToMany(mappedBy = "cliente")
+    private java.util.List<Insight> insights = new java.util.ArrayList<>();
+    public String getCodigoCTI() { return codigoCTI; }
+    public void setCodigoCTI(String codigoCTI) { this.codigoCTI = codigoCTI; }
+    public String getFaixaFaturamento() { return faixaFaturamento; }
+    public void setFaixaFaturamento(String faixaFaturamento) { this.faixaFaturamento = faixaFaturamento; }
+    public java.util.List<Contrato> getContratos() { return contratos; }
+    public java.util.List<Insight> getInsights() { return insights; } // id do cliente
 
     // Relacionamento para consultor, entao um consultor pode ter mais de um cliente
     @ManyToOne 
@@ -120,6 +136,8 @@ public BigDecimal getFaturamentoAnual(){
 public void setFaturamentoAnual(BigDecimal faturamentoAnual){
     this.faturamentoAnual = faturamentoAnual;
 }
+
+public NivelCliente getNivel(){ return nivel; }
 
 public  void setNivel(NivelCliente nivel){
     this.nivel = nivel;
