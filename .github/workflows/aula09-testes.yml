@@ -1,0 +1,36 @@
+name: Testes da Aula 09
+
+on:
+  push:
+    paths:
+      - 'aula09devopstb/**'
+      - '.github/workflows/aula09-testes.yml'
+  pull_request:
+    paths:
+      - 'aula09devopstb/**'
+      - '.github/workflows/aula09-testes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    name: Java 21 e JUnit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obter o codigo
+        uses: actions/checkout@v6
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: aula09devopstb/aula09devopstb/pom.xml
+
+      - name: Executar os testes
+        working-directory: aula09devopstb/aula09devopstb
+        run: mvn --batch-mode --no-transfer-progress clean test
