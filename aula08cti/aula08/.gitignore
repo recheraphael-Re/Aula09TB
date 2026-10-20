@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#Credenciais de acesso ao banco de dados Azure
+src/main/resources/application.properties
