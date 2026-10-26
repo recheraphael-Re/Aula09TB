@@ -1,0 +1,37 @@
+### Esperado: HTTP 200
+GET http://localhost:8081/
+
+### Esperado: HTTP 200
+GET http://localhost:8081/livros
+
+### Esperado: HTTP 201
+POST http://localhost:8081/livros/cadastrar
+Content-Type: application/json
+
+{
+  "titulo": "Banco de Dados para Iniciantes",
+  "autor": "Maria Souza",
+  "editora": "EduTech",
+  "ano": 2023,
+  "categoria": "Informática",
+  "status": "Disponível"
+}
+
+### Esperado: HTTP 200
+PUT http://localhost:8081/livros/alterar/1
+Content-Type: application/json
+
+{
+  "titulo": "Banco de Dados para Iniciantes",
+  "autor": "Maria Souza",
+  "editora": "EduTech",
+  "ano": 2024,
+  "categoria": "Informática",
+  "status": "Emprestado"
+}
+
+### Esperado: HTTP 200
+GET http://localhost:8081/livros/1
+
+### Esperado: HTTP 200
+GET http://localhost:8081/documentacao

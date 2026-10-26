@@ -1,0 +1,39 @@
+### Esperado: HTTP 200
+GET http://localhost:8080/
+
+### Esperado: HTTP 200
+GET http://localhost:8080/status
+
+### Esperado: HTTP 200
+GET http://localhost:8080/versao
+
+### Esperado: HTTP 200
+GET http://localhost:8080/maquinas
+
+### Esperado: HTTP 201
+POST http://localhost:8080/maquinas/cadastro
+Content-Type: application/json
+
+{
+  "nome": "Máquina CNC 01",
+  "tipo": "CNC",
+  "setor": "Usinagem",
+  "status": "em operação"
+}
+
+### Esperado: HTTP 201
+POST http://localhost:8080/producao
+Content-Type: application/json
+
+{
+  "maquinaId": 1,
+  "consumoKw": 12.5,
+  "horarioAcionamento": "08:30",
+  "pecasProduzidas": 150
+}
+
+### Esperado: HTTP 200
+GET http://localhost:8080/producao
+
+### Esperado: HTTP 200
+GET http://localhost:8080/producao?maquinaId=1
