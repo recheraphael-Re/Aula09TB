@@ -1,0 +1,35 @@
+﻿name: Testes da Aula 10 - CalcPotencia
+
+on:
+  push:
+    paths:
+      - 'aula10devops_potencia/**'
+      - '.github/workflows/aula10-potencia-testes.yml'
+  pull_request:
+    paths:
+      - 'aula10devops_potencia/**'
+      - '.github/workflows/aula10-potencia-testes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obter o codigo
+        uses: actions/checkout@v6
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: aula10devops_potencia/pom.xml
+
+      - name: Executar os testes de potencia
+        working-directory: aula10devops_potencia
+        run: mvn --batch-mode --no-transfer-progress clean test
